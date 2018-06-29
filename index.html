@@ -1,0 +1,129 @@
+<html>
+    <head>
+    </head>
+    <body id="wer">
+        <table id="table">
+            <tr id="row0">
+                <td id="cell0_0" onclick="onClick(this);">?</td>
+                <td id="cell0_1" onclick="onClick(this);">?</td>
+                <td id="cell0_2" onclick="onClick(this);">?</td>
+                <td id="cell0_3" onclick="onClick(this);">?</td>
+                <td id="cell0_4" onclick="onClick(this);">?</td>
+            </tr>
+            <tr id="row1">
+                <td id="cell1_0" onclick="onClick(this);">?</td>
+                <td id="cell1_1" onclick="onClick(this);">?</td>
+                <td id="cell1_2" onclick="onClick(this);">?</td>
+                <td id="cell1_3" onclick="onClick(this);">?</td>
+                <td id="cell1_4" onclick="onClick(this);">?</td>
+            </tr>
+            <tr id="row2">
+                <td id="cell2_0" onclick="onClick(this);">?</td>
+                <td id="cell2_1" onclick="onClick(this);">?</td>
+                <td id="cell2_2" onclick="onClick(this);">?</td>
+                <td id="cell2_3" onclick="onClick(this);">?</td>
+                <td id="cell2_4" onclick="onClick(this);">?</td>
+            </tr>
+            <tr id="row3">
+                <td id="cell3_0" onclick="onClick(this);">?</td>
+                <td id="cell3_1" onclick="onClick(this);">?</td>
+                <td id="cell3_2" onclick="onClick(this);">?</td>
+                <td id="cell3_3" onclick="onClick(this);">?</td>
+                <td id="cell3_4" onclick="onClick(this);">?</td>
+            </tr>
+            <tr id="row4">
+                <td id="cell4_0" onclick="onClick(this);">?</td>
+                <td id="cell4_1" onclick="onClick(this);">?</td>
+                <td id="cell4_2" onclick="onClick(this);">?</td>
+                <td id="cell4_3" onclick="onClick(this);">?</td>
+                <td id="cell4_4" onclick="onClick(this);">?</td>
+            </tr>
+        </table>
+            <script type="text/javascript"> 
+                        var n = 5;
+                        var m = 3;
+
+                        var field = new Array();
+  for(var i=0; i<n; i++){
+    field[i] = new Array();
+    for(var j=0; j<n; j++){
+        field[i][j] = 0;
+    }
+  }
+  var t=0;
+                        while (t<m)
+                        {
+                            i = Math.random() * (n-1);
+                            i = Math.round(i);
+                            j = Math.random() * (n-1);
+                            j = Math.round(j);
+                            if (field[i][j]==0) {field[i][j]='*';t++;}
+                        }
+                        /*for(var i=0; i<n; i++)
+                        {document.write(field[i]+'<br>');}
+                        document.write('<br>');*/
+                        var r=0;
+                        for(var i=0; i<n; i++) {
+                            for(var j=0; j<n; j++) 
+                            {
+                                if (i>0) {var i_min = i-1} else {var i_min = 0}; 
+                                if (i<n-1) {var i_max = i+1} else {var i_max = n-1};
+                                if (j>0) {var j_min = j-1} else {var j_min = 0}; 
+                                if (j<n-1) {var j_max = j+1} else {var j_max = n-1};
+                                r=0;
+                                        for(var i1=i_min; i1<=i_max; i1++) {
+                                            for(var j1=j_min; j1<=j_max; j1++) 
+                                            {
+                                                if (field[i1][j1] == '*')  r++;
+                                                if (field[i][j] != '*') {field[i][j]=r};
+                                            }
+                                        }
+                            }
+                        }  
+                        document.write('<br>');
+                       // document.write('<table border="1px" cellpadding="5px" cellspasing="0px">');
+                        for(var i=0; i<n; i++){
+                           // document.write('<tr>');
+                                //var table_row = document.createElement('tr');
+                               // table_row.id = "row"+1;
+                                //table.appendChild(table_row);
+                        for(var j=0; j<n; j++)
+                        {
+                            //var table_cell = document.createElement('td');
+                            //table_cell.id = "cell"+i+'_'+j;
+                            //table_cell.innerHTML = field[i][j];
+                            //row+i.appendChild(table_cell);
+                            //document.write('<td id="сell'+i+'_'+j+'">'+field[i][j]+'</td>');
+                            //var name = 'cell'+i+'_'+j; !!!!
+                            //document.getElementById(name).innerText=field[i][j]; !!!
+                            }
+                        //document.write('</tr>');
+                        }
+                        //document.write('</table>')
+                        ;
+                        //document.body.style.backgroundColor = "#AA0000";
+                        //document.getElementById("cell1_2").style.backgroundColor = "#000";
+                        function onClick(sender) {
+                            ide = event.srcElement.id;
+                            var rt = /[^cell]/
+                            var ide2 = ide.match(rt);
+                            //alert(ide2);
+                            var i2r = /\d{1}/;
+                            var i2 = ide.match(i2r);
+                            var j2r = /\d{1}$/;
+                            var j2 = ide.match(j2r);
+                            var val = field[i2][j2];
+                            //alert ('i2 = '+i2+' j2 = '+j2+' val = '+val);
+                           // alert( ide.match(i2));
+                            if (field[i2][j2] == '*') {alert ('БАБАХ!!! Вы проиграли!');
+                            document.getElementById(ide).innerText = field[i2][j2];
+                            document.getElementById(ide).style.backgroundColor = "red";
+                            }
+                            else {
+                           // alert(document.getElementById(ide).innerText);
+                           document.getElementById(ide).innerText = field[i2][j2];}
+                            }
+                    </script>
+                
+    </body>
+</html>
