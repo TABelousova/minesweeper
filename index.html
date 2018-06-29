@@ -2,6 +2,7 @@
     <head>
     </head>
     <body id="wer">
+        <!--игровое поле 5*5-->
         <table id="table">
             <tr id="row0">
                 <td id="cell0_0" onclick="onClick(this);">?</td>
@@ -40,9 +41,11 @@
             </tr>
         </table>
             <script type="text/javascript"> 
+                       // размерность поля, пока не работает
                         var n = 5;
+                        // количество мин
                         var m = 3;
-
+// создание массива и заполнение нулями (нафига нулями??)
                         var field = new Array();
   for(var i=0; i<n; i++){
     field[i] = new Array();
@@ -50,6 +53,7 @@
         field[i][j] = 0;
     }
   }
+//расстановка мин
   var t=0;
                         while (t<m)
                         {
@@ -59,9 +63,6 @@
                             j = Math.round(j);
                             if (field[i][j]==0) {field[i][j]='*';t++;}
                         }
-                        /*for(var i=0; i<n; i++)
-                        {document.write(field[i]+'<br>');}
-                        document.write('<br>');*/
                         var r=0;
                         for(var i=0; i<n; i++) {
                             for(var j=0; j<n; j++) 
@@ -80,49 +81,42 @@
                                         }
                             }
                         }  
-                        document.write('<br>');
-                       // document.write('<table border="1px" cellpadding="5px" cellspasing="0px">');
-                        for(var i=0; i<n; i++){
-                           // document.write('<tr>');
-                                //var table_row = document.createElement('tr');
-                               // table_row.id = "row"+1;
-                                //table.appendChild(table_row);
-                        for(var j=0; j<n; j++)
-                        {
-                            //var table_cell = document.createElement('td');
-                            //table_cell.id = "cell"+i+'_'+j;
-                            //table_cell.innerHTML = field[i][j];
-                            //row+i.appendChild(table_cell);
-                            //document.write('<td id="сell'+i+'_'+j+'">'+field[i][j]+'</td>');
-                            //var name = 'cell'+i+'_'+j; !!!!
-                            //document.getElementById(name).innerText=field[i][j]; !!!
-                            }
-                        //document.write('</tr>');
-                        }
-                        //document.write('</table>')
-                        ;
-                        //document.body.style.backgroundColor = "#AA0000";
-                        //document.getElementById("cell1_2").style.backgroundColor = "#000";
+                        //количество открытых ячеек для поверки, есть ли неоткрытые не мины
+                        var count_cell = 0;
+                        //открыта ли хоть одна мина
+                        var lose = 0;
+                        //обработка нажатия на ячейку
                         function onClick(sender) {
+                            //проверка, что мины еще не открыты
+                            if (lose != 1){
                             ide = event.srcElement.id;
                             var rt = /[^cell]/
                             var ide2 = ide.match(rt);
-                            //alert(ide2);
+                            //разбор id элемента для определения i2 (координата по x)
                             var i2r = /\d{1}/;
                             var i2 = ide.match(i2r);
+                            //разбор id элемента для определения j2 (координата по y)
                             var j2r = /\d{1}$/;
                             var j2 = ide.match(j2r);
+                            //определение соответствующего координатам значения в массиве
                             var val = field[i2][j2];
-                            //alert ('i2 = '+i2+' j2 = '+j2+' val = '+val);
-                           // alert( ide.match(i2));
+                            //проверка, что данный элемент еще не был открыт
+                           if (document.getElementById(ide).innerText == '?')
+                            {
+                            //если открыта мина, то игрок проиграл
                             if (field[i2][j2] == '*') {alert ('БАБАХ!!! Вы проиграли!');
                             document.getElementById(ide).innerText = field[i2][j2];
                             document.getElementById(ide).style.backgroundColor = "red";
+                            lose = 1;
                             }
                             else {
-                           // alert(document.getElementById(ide).innerText);
-                           document.getElementById(ide).innerText = field[i2][j2];}
-                            }
+                            //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
+                           document.getElementById(ide).innerText = field[i2][j2];
+                           //увеличиваем счетчик открытых ячеек
+                           count_cell++;
+                           //если ячейки без мин закончились, то игрок выиграл
+                           if (count_cell==n*n-m) {alert ('Поздравляю, Вы выиграли!'); lose=0;}}}
+                            }}
                     </script>
                 
     </body>
