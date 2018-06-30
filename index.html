@@ -1,8 +1,20 @@
 <html>
-    <head>
-    </head>
-    <body id="wer">
-        <!--игровое поле 5*5-->
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="wer">
+    <!--игровое поле 5*5-->
+    <div class="game_field">
+        <div class="header">
+        <span class="header-text">
+            Осталось мин:
+        </span>
+        <span id="mineleft">
+            3
+        </span>
+        </div>
         <table id="table">
             <tr id="row0">
                 <td id="cell0_0" onclick="onClick(this);">?</td>
@@ -40,84 +52,86 @@
                 <td id="cell4_4" onclick="onClick(this);">?</td>
             </tr>
         </table>
-            <script type="text/javascript"> 
-                       // размерность поля, пока не работает
-                        var n = 5;
-                        // количество мин
-                        var m = 3;
-// создание массива и заполнение нулями (нафига нулями??)
-                        var field = new Array();
-  for(var i=0; i<n; i++){
-    field[i] = new Array();
-    for(var j=0; j<n; j++){
-        field[i][j] = 0;
-    }
-  }
-//расстановка мин
-  var t=0;
-                        while (t<m)
-                        {
-                            i = Math.random() * (n-1);
-                            i = Math.round(i);
-                            j = Math.random() * (n-1);
-                            j = Math.round(j);
-                            if (field[i][j]==0) {field[i][j]='*';t++;}
-                        }
-                        var r=0;
-                        for(var i=0; i<n; i++) {
-                            for(var j=0; j<n; j++) 
-                            {
-                                if (i>0) {var i_min = i-1} else {var i_min = 0}; 
-                                if (i<n-1) {var i_max = i+1} else {var i_max = n-1};
-                                if (j>0) {var j_min = j-1} else {var j_min = 0}; 
-                                if (j<n-1) {var j_max = j+1} else {var j_max = n-1};
-                                r=0;
-                                        for(var i1=i_min; i1<=i_max; i1++) {
-                                            for(var j1=j_min; j1<=j_max; j1++) 
-                                            {
-                                                if (field[i1][j1] == '*')  r++;
-                                                if (field[i][j] != '*') {field[i][j]=r};
-                                            }
-                                        }
-                            }
-                        }  
-                        //количество открытых ячеек для поверки, есть ли неоткрытые не мины
-                        var count_cell = 0;
-                        //открыта ли хоть одна мина
-                        var lose = 0;
-                        //обработка нажатия на ячейку
-                        function onClick(sender) {
-                            //проверка, что мины еще не открыты
-                            if (lose != 1){
-                            ide = event.srcElement.id;
-                            var rt = /[^cell]/
-                            var ide2 = ide.match(rt);
-                            //разбор id элемента для определения i2 (координата по x)
-                            var i2r = /\d{1}/;
-                            var i2 = ide.match(i2r);
-                            //разбор id элемента для определения j2 (координата по y)
-                            var j2r = /\d{1}$/;
-                            var j2 = ide.match(j2r);
-                            //определение соответствующего координатам значения в массиве
-                            var val = field[i2][j2];
-                            //проверка, что данный элемент еще не был открыт
-                           if (document.getElementById(ide).innerText == '?')
-                            {
-                            //если открыта мина, то игрок проиграл
-                            if (field[i2][j2] == '*') {alert ('БАБАХ!!! Вы проиграли!');
-                            document.getElementById(ide).innerText = field[i2][j2];
-                            document.getElementById(ide).style.backgroundColor = "red";
-                            lose = 1;
-                            }
-                            else {
-                            //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
-                           document.getElementById(ide).innerText = field[i2][j2];
-                           //увеличиваем счетчик открытых ячеек
-                           count_cell++;
-                           //если ячейки без мин закончились, то игрок выиграл
-                           if (count_cell==n*n-m) {alert ('Поздравляю, Вы выиграли!'); lose=0;}}}
-                            }}
-                    </script>
-                
-    </body>
+    </div>
+    <script type="text/javascript"> 
+        // размерность поля, пока не работает
+        var n = 5;
+        // количество мин
+        var m = 3;
+        // создание массива и заполнение нулями (нафига нулями??)
+        var field = new Array();
+        for (var i = 0; i < n; i++) {
+            field[i] = new Array();
+            for (var j = 0; j < n; j++) {
+                field[i][j] = 0;
+            }
+        }
+        //расстановка мин
+        var t = 0;
+        while (t < m) {
+            i = Math.random() * (n - 1);
+            i = Math.round(i);
+            j = Math.random() * (n - 1);
+            j = Math.round(j);
+            if (field[i][j] == 0) { field[i][j] = '*'; t++; }
+        }
+        var r = 0;
+        for (var i = 0; i < n; i++) {
+            for (var j = 0; j < n; j++) {
+                if (i > 0) { var i_min = i - 1 } else { var i_min = 0 };
+                if (i < n - 1) { var i_max = i + 1 } else { var i_max = n - 1 };
+                if (j > 0) { var j_min = j - 1 } else { var j_min = 0 };
+                if (j < n - 1) { var j_max = j + 1 } else { var j_max = n - 1 };
+                r = 0;
+                for (var i1 = i_min; i1 <= i_max; i1++) {
+                    for (var j1 = j_min; j1 <= j_max; j1++) {
+                        if (field[i1][j1] == '*') r++;
+                        if (field[i][j] != '*') { field[i][j] = r };
+                    }
+                }
+            }
+        }
+        //количество открытых ячеек для поверки, есть ли неоткрытые не мины
+        var count_cell = 0;
+        //открыта ли хоть одна мина
+        var lose = 0;
+        //обработка нажатия на ячейку
+        function onClick(sender) {
+            //проверка, что мины еще не открыты
+            if (lose != 1) {
+                ide = event.srcElement.id;
+                var rt = /[^cell]/
+                var ide2 = ide.match(rt);
+                //разбор id элемента для определения i2 (координата по x)
+                var i2r = /\d{1}/;
+                var i2 = ide.match(i2r);
+                //разбор id элемента для определения j2 (координата по y)
+                var j2r = /\d{1}$/;
+                var j2 = ide.match(j2r);
+                //определение соответствующего координатам значения в массиве
+                var val = field[i2][j2];
+                //проверка, что данный элемент еще не был открыт
+                if (document.getElementById(ide).innerText == '?') {
+                    //если открыта мина, то игрок проиграл
+                    if (field[i2][j2] == '*') {
+                        alert('БАБАХ!!! Вы проиграли!');
+                        document.getElementById(ide).innerText = field[i2][j2];
+                        document.getElementById(ide).style.backgroundColor = "red";
+                        lose = 1;
+                    }
+                    else {
+                        //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
+                        document.getElementById(ide).innerText = field[i2][j2];
+                        //увеличиваем счетчик открытых ячеек
+                        count_cell++;
+                        //если ячейки без мин закончились, то игрок выиграл
+                        if (count_cell == n * n - m) { alert('Поздравляю, Вы выиграли!'); lose = 1; }
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
 </html>
