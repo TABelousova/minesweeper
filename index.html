@@ -58,6 +58,8 @@
         var n = 5;
         // количество мин
         var m = 3;
+        // разница между количеством мин и минами, помеченными игроком
+        var mineleft = 3;
         // создание массива и заполнение нулями (нафига нулями??)
         var field = new Array();
         for (var i = 0; i < n; i++) {
@@ -143,17 +145,31 @@
                 var j2 = ide.match(j2r);
                 //определение соответствующего координатам значения в массиве
                 var val = field[i2][j2];
+                //если в клетке стоит ? заменяем его на метку мины M
                 if (document.getElementById(ide).innerText == '?')
                 {
+                    // помечаем клетку как мину
                     document.getElementById(ide).innerText = "M"; 
                     document.getElementById(ide).style.color = "red";
+                    // уменьшаем количество неотмеченных мин на 1
+                    mineleft = mineleft-1;
+                    document.getElementById("mineleft").innerText = mineleft;
                     
                 } else {
-                if (document.getElementById(ide).innerText == 'M')
-                {
-                    document.getElementById(ide).innerText = "!"; 
-                    document.getElementById(ide).style.color = "blue";
-                }}
+                        //если на клетку поставлена мина, меняем ее на предупредительный знак
+                    if (document.getElementById(ide).innerText == 'M')
+                    {
+                        document.getElementById(ide).innerText = "!"; 
+                        document.getElementById(ide).style.color = "blue";
+                        //увеличиваем количество неотмеченных мин
+                        mineleft = mineleft+1;
+                        document.getElementById("mineleft").innerText = mineleft;
+                    }
+                        else {
+                            document.getElementById(ide).innerText = "?"; 
+                            document.getElementById(ide).style.color = "black";
+                        }
+                    }
 
         }}
     </script>
