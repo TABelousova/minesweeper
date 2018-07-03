@@ -97,6 +97,16 @@
         var count_cell = 0;
         //открыта ли хоть одна мина
         var lose = 0;
+        //функция для дооткратия массива после окончания игры
+        function showfield() {
+            for (var i = 0; i < n; i++) {
+            for (var j = 0; j < n; j++) {
+                cellname="cell"+i+"_"+j;
+                if (document.getElementById(cellname).innerText=="?")
+                {document.getElementById(cellname).innerText=field[i][j]}
+            }
+        }
+        }
         //обработка нажатия на ячейку
         function onClick(sender) {
             //проверка, что мины еще не открыты
@@ -120,6 +130,7 @@
                         document.getElementById(ide).innerText = field[i2][j2];
                         document.getElementById(ide).style.backgroundColor = "red";
                         lose = 1;
+                        showfield();
                     }
                     else {
                         //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
@@ -127,7 +138,7 @@
                         //увеличиваем счетчик открытых ячеек
                         count_cell++;
                         //если ячейки без мин закончились, то игрок выиграл
-                        if (count_cell == n * n - m) { alert('Поздравляю, Вы выиграли!'); lose = 1; }
+                        if (count_cell == n * n - m) { alert('Поздравляю, Вы выиграли!'); lose = 1; showfield();}
                     }
                 }
             }
