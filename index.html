@@ -16,7 +16,7 @@
         </span>
         </div>
         <table id="table">
-            <tr id="row0">
+            <!--<tr id="row0">
                 <td id="cell0_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
                 <td id="cell0_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
                 <td id="cell0_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
@@ -50,22 +50,34 @@
                 <td id="cell4_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
                 <td id="cell4_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
                 <td id="cell4_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>
+            </tr>-->
         </table>
     </div>
     <script type="text/javascript"> 
         // размерность поля, пока не работает
-        var n = 5;
+        var n=prompt("Укажите количество клеток на одной стороне игрового поля", " ");
         // количество мин
-        var m = 3;
+        var m=prompt("Укажите количество мин на поле", " ");
         // разница между количеством мин и минами, помеченными игроком
-        var mineleft = 3;
+        var mineleft = m;
+        document.getElementById("mineleft").innerText = mineleft;
         // создание массива и заполнение нулями (нафига нулями??)
         var field = new Array();
         for (var i = 0; i < n; i++) {
             field[i] = new Array();
+            var rowid = "row"+i;
+            var newrow = document.createElement('tr');
+            newrow.id = rowid;
+            table.appendChild(newrow);
             for (var j = 0; j < n; j++) {
                 field[i][j] = 0;
+                var cellid = "cell"+i+"_"+j;
+                var newcell = document.createElement('td');
+                newcell.innerText = "?";
+                newcell.id = cellid;
+                document.getElementById(rowid).appendChild(newcell);
+                //newcell.onclick = onClick(this);
+                //newcell.oncontextmenu = abc(this);
             }
         }
         //расстановка мин
@@ -78,6 +90,7 @@
             if (field[i][j] == 0) { field[i][j] = '*'; t++; }
         }
         var r = 0;
+        //подсчет количества соседних мин для каждой из клеток поля
         for (var i = 0; i < n; i++) {
             for (var j = 0; j < n; j++) {
                 if (i > 0) { var i_min = i - 1 } else { var i_min = 0 };
