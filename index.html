@@ -76,8 +76,8 @@
                 newcell.innerText = "?";
                 newcell.id = cellid;
                 document.getElementById(rowid).appendChild(newcell);
-                //newcell.onclick = onClick(this);
-                //newcell.oncontextmenu = abc(this);
+                newcell.onclick = onCellClick;
+                newcell.oncontextmenu = onRightClick;
             }
         }
         //расстановка мин
@@ -115,16 +115,26 @@
             for (var i = 0; i < n; i++) {
             for (var j = 0; j < n; j++) {
                 cellname="cell"+i+"_"+j;
+                //открывает знаки вопроса
                 if (document.getElementById(cellname).innerText=="?")
-                {document.getElementById(cellname).innerText=field[i][j]}
+                {document.getElementById(cellname).innerText=field[i][j]};
+                //открывает восклицательные знаки
+                if (document.getElementById(cellname).innerText=="!")
+                {document.getElementById(cellname).innerText=field[i][j];
+                document.getElementById(cellname).style.color = "black";};
+                //открывает неправильно отмеченные бомбы
+                if ((document.getElementById(cellname).innerText=="M") &
+                (field[i][j] != "*"))
+                {document.getElementById(cellname).innerText=field[i][j];
+                document.getElementById(cellname).style.color = "red"};
             }
         }
         }
         //обработка нажатия на ячейку
-        function onClick(sender) {
+        function onCellClick(event) {
             //проверка, что мины еще не открыты
             if (lose != 1) {
-                ide = event.srcElement.id;
+                ide = event.target.id;
                 var rt = /[^cell]/
                 var ide2 = ide.match(rt);
                 //разбор id элемента для определения i2 (координата по x)
@@ -156,9 +166,9 @@
                 }
             }
         }
-        function abc(sender) {
+        function onRightClick(event) {
         if (lose != 1) {
-                ide = event.srcElement.id;
+                ide = event.target.id;
                 var rt = /[^cell]/
                 var ide2 = ide.match(rt);
                 //разбор id элемента для определения i2 (координата по x)
@@ -195,7 +205,7 @@
                         }
                     }
 
-        }}
+        }return false;}
     </script>
 
 </body>
