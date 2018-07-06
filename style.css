@@ -1,8 +1,18 @@
+body {
+    margin: 0;
+}
+
 table {
     background-color: gray;
     border: 1px solid black;
     padding: 0;
     margin: 0 auto;
+    border-spacing: 0;
+}
+
+tr {
+    margin: 0;
+    padding: 0;
 }
 
 td {
@@ -24,5 +34,20 @@ td {
 
 .header {
     margin: 0 auto;
-    width: 160px;;
+}
+
+.game_field {
+    text-align: center;
+    visibility: hidden;
+} 
+
+.start_setting {
+    background-color: blue;
+    width: 300px;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
 }

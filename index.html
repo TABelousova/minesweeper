@@ -5,9 +5,18 @@
 </head>
 
 <body id="wer">
+    <div class="start_setting" id="start_setting">
+        <form action="index.html" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
+            <p>Ширина игрового поля</p>
+            <input type="text" size="20" name="n_value" id="n_value">
+            <p>Количество бомб</p>
+            <input type="text" size="20" name="m_value" id="m_value"><br>
+            <p><input type="submit" value="Начать игру"></p>
+        </form>
+    </div>
     <!--игровое поле 5*5-->
-    <div class="game_field">
-        <div class="header">
+    <div class="game_field" id="game_field">
+        <span class="header">
         <span class="header-text">
             Осталось мин:
         </span>
@@ -16,53 +25,23 @@
         </span>
         </div>
         <table id="table">
-            <!--<tr id="row0">
-                <td id="cell0_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell0_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell0_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell0_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell0_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>
-            <tr id="row1">
-                <td id="cell1_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell1_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell1_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell1_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell1_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>
-            <tr id="row2">
-                <td id="cell2_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell2_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell2_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell2_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell2_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>
-            <tr id="row3">
-                <td id="cell3_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell3_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell3_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell3_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell3_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>
-            <tr id="row4">
-                <td id="cell4_0" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell4_1" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell4_2" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell4_3" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-                <td id="cell4_4" onclick="onClick(this);" oncontextmenu="abc(this);return false;">?</td>
-            </tr>-->
         </table>
     </div>
     <script type="text/javascript"> 
-        // размерность поля, пока не работает
-        var n=prompt("Укажите количество клеток на одной стороне игрового поля", " ");
-        // количество мин
-        var m=prompt("Укажите количество мин на поле", " ");
-        // разница между количеством мин и минами, помеченными игроком
-        var mineleft = m;
-        document.getElementById("mineleft").innerText = mineleft;
+        //количество открытых ячеек для поверки, есть ли неоткрытые не мины
+        var count_cell = 0;
+        //открыта ли хоть одна мина
+        var lose = 0;
+        //n - размерность поля m - количество мин
         // создание массива и заполнение нулями (нафига нулями??)
         var field = new Array();
+        var n;
+        var m;
+        // разница между количеством мин и минами, помеченными игроком
+        var mineleft;
+        function create_field() {
+        mineleft = m;
+        document.getElementById("mineleft").innerText = mineleft;
         for (var i = 0; i < n; i++) {
             field[i] = new Array();
             var rowid = "row"+i;
@@ -106,10 +85,7 @@
                 }
             }
         }
-        //количество открытых ячеек для поверки, есть ли неоткрытые не мины
-        var count_cell = 0;
-        //открыта ли хоть одна мина
-        var lose = 0;
+        }
         //функция для дооткратия массива после окончания игры
         function showfield() {
             for (var i = 0; i < n; i++) {
@@ -165,6 +141,18 @@
                     }
                 }
             }
+        }
+        function onSubm(event) {
+            //debugger;
+            //console.log;
+            event.stopPropagation();
+            event.preventDefault();
+            //alert('submit!');
+            n = document.forms["start_setting_form"].elements["n_value"].value;
+            m = document.forms["start_setting_form"].elements["m_value"].value;
+            create_field();
+            document.getElementById("start_setting").style.visibility = "hidden";
+            document.getElementById("game_field").style.visibility = "visible";
         }
         function onRightClick(event) {
         if (lose != 1) {
