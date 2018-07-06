@@ -5,7 +5,7 @@
 </head>
 
 <body id="wer">
-    <div class="start_setting" id="start_setting">
+    <div class="popup_window" id="start_setting">
         <form action="index.html" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
             <p>Ширина игрового поля</p>
             <input type="number" min="2" max="99" step="1" size="20" name="n_value" id="n_value">
@@ -14,6 +14,11 @@
             <p class="error_value" id="error_value"></p>
             <p><input type="submit" value="Начать игру"></p>
         </form>
+    </div>
+    <div class="popup_window" id="finish_window">
+        <p id="finish"></p>
+        <p>Сыграть еще раз?</p>
+        <input type="button" value="Да"><input type="button" value="Нет, спасибо">
     </div>
     <!--игровое поле 5*5-->
     <div class="game_field" id="game_field">
@@ -126,7 +131,9 @@
                 if (document.getElementById(ide).innerText == '?') {
                     //если открыта мина, то игрок проиграл
                     if (field[i2][j2] == '*') {
-                        alert('БАБАХ!!! Вы проиграли!');
+                        //alert('БАБАХ!!! Вы проиграли!');
+                        document.getElementById("finish_window").style.visibility = "visible";
+                        document.getElementById("finish").innerText = "БАБАХ!!! Вы проиграли!";
                         document.getElementById(ide).innerText = field[i2][j2];
                         document.getElementById(ide).style.backgroundColor = "red";
                         lose = 1;
@@ -138,7 +145,11 @@
                         //увеличиваем счетчик открытых ячеек
                         count_cell++;
                         //если ячейки без мин закончились, то игрок выиграл
-                        if (count_cell == n * n - m) { alert('Поздравляю, Вы выиграли!'); lose = 1; showfield();}
+                        if (count_cell == n * n - m) { 
+                            //alert('Поздравляю, Вы выиграли!'); 
+                            document.getElementById("finish_window").style.visibility = "visible";
+                            document.getElementById("finish").innerText = "Поздравляю, Вы выиграли!";
+                            lose = 1; showfield();}
                     }
                 }
             }

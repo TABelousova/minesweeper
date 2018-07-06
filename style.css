@@ -41,7 +41,7 @@ td {
     visibility: hidden;
 } 
 
-.start_setting {
+.popup_window {
     background-color: blue;
     width: 300px;
     position: absolute;
@@ -51,6 +51,10 @@ td {
     padding-right: 20px;
     text-align: center;
     border: 2px solid black;
+}
+
+#finish_window {
+    visibility: hidden;
 }
 
 input {
