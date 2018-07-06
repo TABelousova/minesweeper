@@ -8,9 +8,10 @@
     <div class="start_setting" id="start_setting">
         <form action="index.html" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
             <p>Ширина игрового поля</p>
-            <input type="text" size="20" name="n_value" id="n_value">
+            <input type="number" min="2" max="99" step="1" size="20" name="n_value" id="n_value">
             <p>Количество бомб</p>
-            <input type="text" size="20" name="m_value" id="m_value"><br>
+            <input type="number" min="1" max="99" step="1" size="20" name="m_value" id="m_value"><br>
+            <p class="error_value" id="error_value"></p>
             <p><input type="submit" value="Начать игру"></p>
         </form>
     </div>
@@ -114,10 +115,10 @@
                 var rt = /[^cell]/
                 var ide2 = ide.match(rt);
                 //разбор id элемента для определения i2 (координата по x)
-                var i2r = /\d{1}/;
+                var i2r = /\d+/;
                 var i2 = ide.match(i2r);
                 //разбор id элемента для определения j2 (координата по y)
-                var j2r = /\d{1}$/;
+                var j2r = /\d+$/;
                 var j2 = ide.match(j2r);
                 //определение соответствующего координатам значения в массиве
                 var val = field[i2][j2];
@@ -142,17 +143,19 @@
                 }
             }
         }
+        //функция чтения значения из формы
         function onSubm(event) {
-            //debugger;
-            //console.log;
             event.stopPropagation();
             event.preventDefault();
-            //alert('submit!');
             n = document.forms["start_setting_form"].elements["n_value"].value;
             m = document.forms["start_setting_form"].elements["m_value"].value;
+            if (m>=n*2) {document.getElementById("error_value").innerText = "Количество бомб должно быть меньше "+n*n;
+            return false;}
+            else {
             create_field();
             document.getElementById("start_setting").style.visibility = "hidden";
             document.getElementById("game_field").style.visibility = "visible";
+            }
         }
         function onRightClick(event) {
         if (lose != 1) {

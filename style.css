@@ -50,4 +50,13 @@ td {
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
+    border: 2px solid black;
+}
+
+input {
+    text-align: center;
+}
+
+.error_value {
+    color: red;
 }
