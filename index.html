@@ -149,7 +149,7 @@
             event.preventDefault();
             n = document.forms["start_setting_form"].elements["n_value"].value;
             m = document.forms["start_setting_form"].elements["m_value"].value;
-            if (m>=n*2) {document.getElementById("error_value").innerText = "Количество бомб должно быть меньше "+n*n;
+            if (m>=n*n) {document.getElementById("error_value").innerText = "Количество бомб должно быть меньше "+n*n;
             return false;}
             else {
             create_field();
