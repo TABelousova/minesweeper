@@ -28,7 +28,7 @@ text-align: center;
 td:hover {
 cursor: pointer;}
 
-#mineleft {
+.status {
     color: red;
     font-weight: bold;
     font-size: 20px;
@@ -48,6 +48,25 @@ color: #112503;
     text-align: center;
     visibility: hidden;
 } 
+
+form {
+    margin-bottom: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p#finish {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    color: #112503;
+	font-weight: bold;
+}
 
 .popup_window {
     background-color: #659980;

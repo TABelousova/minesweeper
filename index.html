@@ -17,7 +17,8 @@
     </div>
     <div class="popup_window" id="finish_window">
         <p id="finish"></p>
-        <input type="button" class="button" value="Закрыть"><input type="button" class="button" value="Лучшие результаты">
+       <!-- <input type="button" class="button" value="Закрыть"><input type="button" class="button" value="Лучшие результаты">
+       -->
     </div>
     <!--игровое поле 5*5-->
     <div class="game_field" id="game_field">
@@ -26,7 +27,7 @@
             <span class="header-text">
             Осталось мин:
         </span>
-        <span id="mineleft">
+        <span id="mineleft" class="status">
             3
         </span>
         </p>
@@ -34,8 +35,8 @@
         <span class="header-text">
             Время игры:
         </span>
-        <span id="mineleft">
-            3
+        <span id="timer" class="status">
+            0
         </span>
         </p>
         </span>
@@ -73,10 +74,9 @@
                     нажмите правую кнопку мыши.
                 </span>
                 </div>
-        <div class="buttons">
-        <input type="button" class="button" value="Новая игра">
-        <input type="button" class="button" value="Лучшие результаты">
-        </div>
+        <!--<div class="buttons">
+        <input type="button" class="button" value="Начать заново" id="new-game">
+        </div>-->
     </div>
     <script type="text/javascript"> 
         //количество открытых ячеек для поверки, есть ли неоткрытые не мины
@@ -84,7 +84,7 @@
         //открыта ли хоть одна мина
         var lose = 0;
         //n - размерность поля m - количество мин
-        // создание массива и заполнение нулями (нафига нулями??)
+        // создание массива и заполнение нулями
         var field = new Array();
         var n;
         var m;
@@ -218,6 +218,7 @@
             else{document.getElementById("error_value").innerText = "Укажите размер игрового поля";
             return false;}
         }
+
         function onRightClick(event) {
         if (lose != 1) {
                 ide = event.target.id;
