@@ -1,10 +1,11 @@
 body {
     margin: 0;
+background-color: #DCDCDC;
 }
 
 table {
-    background-color: gray;
-    border: 1px solid black;
+    background-color: #beb5c5;
+    border: 1px solid #32363f;
     padding: 0;
     margin: 0 auto;
     border-spacing: 0;
@@ -19,7 +20,13 @@ td {
     padding: 5px;
     margin: 0;
     border: 1px dashed dimgray;
+width: 15px;
+height: 15px;
+text-align: center;
 }
+
+td:hover {
+cursor: pointer;}
 
 #mineleft {
     color: red;
@@ -30,6 +37,7 @@ td {
 .header-text {
     font-weight: bold;
     font-size: 20px;
+color: #112503;
 }
 
 .header {
@@ -42,15 +50,18 @@ td {
 } 
 
 .popup_window {
-    background-color: blue;
+    background-color: #659980;
     width: 300px;
+height: 300px;
     position: absolute;
     left: calc(50% - 150px);
-    top: 10px;
+    top: calc(50% - 150px);
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
-    border: 2px solid black;
+    border: 1px solid #32363f;
+    box-shadow: 0 0 13px rgba(0,0,0,0.5);
+    border-radius: 10px;
 }
 
 #finish_window {
@@ -63,4 +74,14 @@ input {
 
 .error_value {
     color: red;
+}
+
+#start_setting_form > p {
+	color: #112503;
+	font-weight: bold;
+}
+
+#m_value, #n_value {
+border: 1px solid #32363f;
+    border-radius: 5px;
 }
