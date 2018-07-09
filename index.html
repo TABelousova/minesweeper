@@ -39,7 +39,6 @@
         </span>
         </p>
         </span>
-        </div>
         <table id="table">
         </table>
         <div class="instruction">
@@ -91,6 +90,7 @@
         var m;
         // разница между количеством мин и минами, помеченными игроком
         var mineleft;
+        // создание массива-игрового поля
         function create_field() {
         mineleft = m;
         document.getElementById("mineleft").innerText = mineleft;
@@ -101,7 +101,8 @@
             newrow.id = rowid;
             table.appendChild(newrow);
             for (var j = 0; j < n; j++) {
-                field[i][j] = 0;
+                field[i][j] = new Object();
+                field[i][j].value = 0;
                 var cellid = "cell"+i+"_"+j;
                 var newcell = document.createElement('td');
                 newcell.innerText = "?";
@@ -118,7 +119,7 @@
             i = Math.round(i);
             j = Math.random() * (n - 1);
             j = Math.round(j);
-            if (field[i][j] == 0) { field[i][j] = '*'; t++; }
+            if (field[i][j].value == 0) { field[i][j].value = '*'; t++; }
         }
         var r = 0;
         //подсчет количества соседних мин для каждой из клеток поля
@@ -131,29 +132,29 @@
                 r = 0;
                 for (var i1 = i_min; i1 <= i_max; i1++) {
                     for (var j1 = j_min; j1 <= j_max; j1++) {
-                        if (field[i1][j1] == '*') r++;
-                        if (field[i][j] != '*') { field[i][j] = r };
+                        if (field[i1][j1].value == '*') r++;
+                        if (field[i][j].value != '*') { field[i][j].value = r };
                     }
                 }
             }
         }
         }
-        //функция для дооткратия массива после окончания игры
+        //функция для дооткрытия массива после окончания игры
         function showfield() {
             for (var i = 0; i < n; i++) {
             for (var j = 0; j < n; j++) {
                 cellname="cell"+i+"_"+j;
                 //открывает знаки вопроса
                 if (document.getElementById(cellname).innerText=="?")
-                {document.getElementById(cellname).innerText=field[i][j]};
+                {document.getElementById(cellname).innerText=field[i][j].value};
                 //открывает восклицательные знаки
                 if (document.getElementById(cellname).innerText=="!")
-                {document.getElementById(cellname).innerText=field[i][j];
+                {document.getElementById(cellname).innerText=field[i][j].value;
                 document.getElementById(cellname).style.color = "black";};
                 //открывает неправильно отмеченные бомбы
                 if ((document.getElementById(cellname).innerText=="M") &
-                (field[i][j] != "*"))
-                {document.getElementById(cellname).innerText=field[i][j];
+                (field[i][j].value != "*"))
+                {document.getElementById(cellname).innerText=field[i][j].value;
                 document.getElementById(cellname).style.color = "red"};
             }
         }
@@ -172,22 +173,22 @@
                 var j2r = /\d+$/;
                 var j2 = ide.match(j2r);
                 //определение соответствующего координатам значения в массиве
-                var val = field[i2][j2];
+                var val = field[i2][j2].value;
                 //проверка, что данный элемент еще не был открыт
                 if (document.getElementById(ide).innerText == '?') {
                     //если открыта мина, то игрок проиграл
-                    if (field[i2][j2] == '*') {
+                    if (field[i2][j2].value == '*') {
                         //alert('БАБАХ!!! Вы проиграли!');
                         document.getElementById("finish_window").style.visibility = "visible";
                         document.getElementById("finish").innerText = "БАБАХ!!! Вы проиграли!";
-                        document.getElementById(ide).innerText = field[i2][j2];
+                        document.getElementById(ide).innerText = field[i2][j2].value;
                         document.getElementById(ide).style.backgroundColor = "red";
                         lose = 1;
                         showfield();
                     }
                     else {
                         //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
-                        document.getElementById(ide).innerText = field[i2][j2];
+                        document.getElementById(ide).innerText = field[i2][j2].value;
                         //увеличиваем счетчик открытых ячеек
                         count_cell++;
                         //если ячейки без мин закончились, то игрок выиграл
@@ -229,7 +230,7 @@
                 var j2r = /\d{1}$/;
                 var j2 = ide.match(j2r);
                 //определение соответствующего координатам значения в массиве
-                var val = field[i2][j2];
+                var val = field[i2][j2].value;
                 //если в клетке стоит ? заменяем его на метку мины M
                 if (document.getElementById(ide).innerText == '?')
                 {
