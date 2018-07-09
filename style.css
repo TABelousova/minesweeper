@@ -52,7 +52,7 @@ color: #112503;
 .popup_window {
     background-color: #659980;
     width: 300px;
-height: 300px;
+    height: 300px;
     position: absolute;
     left: calc(50% - 150px);
     top: calc(50% - 150px);
@@ -84,4 +84,26 @@ input {
 #m_value, #n_value {
 border: 1px solid #32363f;
     border-radius: 5px;
+}
+
+.button {
+    background-color: #e9a655;
+    color: #112503;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #32363f;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.instruction-bold {
+    font-weight: bold;
+}
+
+.instruction {
+    text-align: center;
+}
+
+.buttons {
+    text-align: center;
 }

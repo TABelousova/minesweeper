@@ -12,26 +12,72 @@
             <p>Количество бомб</p>
             <input type="number" min="1" max="99" step="1" size="20" name="m_value" id="m_value"><br>
             <p class="error_value" id="error_value"></p>
-            <p><input type="submit" value="Начать игру"></p>
+            <p><input type="submit" class="button" value="Начать игру"></p>
         </form>
     </div>
     <div class="popup_window" id="finish_window">
         <p id="finish"></p>
-        <p>Сыграть еще раз?</p>
-        <input type="button" value="Да"><input type="button" value="Нет, спасибо">
+        <input type="button" class="button" value="Закрыть"><input type="button" class="button" value="Лучшие результаты">
     </div>
     <!--игровое поле 5*5-->
     <div class="game_field" id="game_field">
         <span class="header">
-        <span class="header-text">
+        <p>
+            <span class="header-text">
             Осталось мин:
         </span>
         <span id="mineleft">
             3
         </span>
+        </p>
+        <p>
+        <span class="header-text">
+            Время игры:
+        </span>
+        <span id="mineleft">
+            3
+        </span>
+        </p>
+        </span>
         </div>
         <table id="table">
         </table>
+        <div class="instruction">
+        <snap class="instruction-bold">
+            Чтобы открыть клетку поля,
+        </snap>
+        <span class="instruction-text">
+            нажмите левую кнопку мыши
+        </span>
+        </div>
+        <div class="instruction">
+        <snap class="instruction-bold">
+            Чтобы отметить клетку с бомбой,
+        </snap>
+        <span class="instruction-text">
+            нажмите правую кнопку мыши.
+        </span>
+        </div>
+        <div class="instruction">
+        <snap class="instruction-bold">
+            Чтобы отметить клетку знаком вопроса,
+        </snap>
+        <span class="instruction-text">
+            нажмите правую кнопку мыши повторно.
+        </span>
+        </div>
+        <div class="instruction">
+                <snap class="instruction-bold">
+                    Для снятия отметки,
+                </snap>
+                <span class="instruction-text">
+                    нажмите правую кнопку мыши.
+                </span>
+                </div>
+        <div class="buttons">
+        <input type="button" class="button" value="Новая игра">
+        <input type="button" class="button" value="Лучшие результаты">
+        </div>
     </div>
     <script type="text/javascript"> 
         //количество открытых ячеек для поверки, есть ли неоткрытые не мины
@@ -160,13 +206,16 @@
             event.preventDefault();
             n = document.forms["start_setting_form"].elements["n_value"].value;
             m = document.forms["start_setting_form"].elements["m_value"].value;
+            if (n!=0){
             if (m>=n*n) {document.getElementById("error_value").innerText = "Количество бомб должно быть меньше "+n*n;
             return false;}
             else {
             create_field();
             document.getElementById("start_setting").style.visibility = "hidden";
             document.getElementById("game_field").style.visibility = "visible";
-            }
+            }}
+            else{document.getElementById("error_value").innerText = "Укажите размер игрового поля";
+            return false;}
         }
         function onRightClick(event) {
         if (lose != 1) {
