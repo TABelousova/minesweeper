@@ -10,6 +10,8 @@
             <p>Ширина игрового поля</p>
             <input type="number" min="2" max="99" step="1" size="20" name="n_value" id="n_value">
             <p>Количество бомб</p>
+            <p><input name="bombcount" type="radio" value="automine" checked>Рассчитать автоматически</p>
+            <p><input name="bombcount" type="radio" value="mymine" id="mymine">Задать самостоятельно</p>
             <input type="number" min="1" max="99" step="1" size="20" name="m_value" id="m_value"><br>
             <p class="error_value" id="error_value"></p>
             <p><input type="submit" class="button" value="Начать игру"></p>
@@ -88,6 +90,9 @@
         var field = new Array();
         var n;
         var m;
+        //время игры
+        var time = 0;
+        var ti;
         // разница между количеством мин и минами, помеченными игроком
         var mineleft;
         // создание массива-игрового поля
@@ -138,7 +143,12 @@
                 }
             }
         }
+        ti = setInterval("timer()", 1000);
         }
+        function timer() { 
+                time++;
+                document.getElementById("timer").innerText = time;
+            }
         //функция для дооткрытия массива после окончания игры
         function showfield() {
             for (var i = 0; i < n; i++) {
@@ -183,6 +193,7 @@
                         document.getElementById("finish").innerText = "БАБАХ!!! Вы проиграли!";
                         document.getElementById(ide).innerText = field[i2][j2].value;
                         document.getElementById(ide).style.backgroundColor = "red";
+                        setTimeout(function(){clearInterval(ti);}, 1000);
                         lose = 1;
                         showfield();
                     }
@@ -196,6 +207,7 @@
                             //alert('Поздравляю, Вы выиграли!'); 
                             document.getElementById("finish_window").style.visibility = "visible";
                             document.getElementById("finish").innerText = "Поздравляю, Вы выиграли!";
+                            setTimeout(function(){clearInterval(ti);}, 1000);
                             lose = 1; showfield();}
                     }
                 }
@@ -208,8 +220,9 @@
             n = document.forms["start_setting_form"].elements["n_value"].value;
             m = document.forms["start_setting_form"].elements["m_value"].value;
             if (n!=0){
+            //if (document.getElementById("mymine").checked) {
             if (m>=n*n) {document.getElementById("error_value").innerText = "Количество бомб должно быть меньше "+n*n;
-            return false;}
+            return false;}//}
             else {
             create_field();
             document.getElementById("start_setting").style.visibility = "hidden";
