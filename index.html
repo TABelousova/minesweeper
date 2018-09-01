@@ -181,6 +181,41 @@
                 }
             }
         }
+
+        //открытие нулевой области
+        function openNull(i, j, ide){
+            if (field[i][j].player_see == "c")
+            {
+                document.getElementById(ide).innerText = field[i][j].value;
+                field[i][j].player_see = "o";
+                field[i][j].mark = "n";
+                if (field[i][j].value == "0")
+                {
+                    if (i-1 >= 0) {
+                        hlp = i-1;
+                        ide = "cell" + hlp + "_" + j;
+                        openNull(hlp, j, ide);
+                       }
+                    if (i+1 < n) { 
+                        hlp = i+1;
+                        ide = "cell" + hlp + "_" + j;
+                        openNull(hlp, j, ide); 
+                    }
+                    if (j-1 >= 0) {
+                        hlp = j-1;
+                        ide = "cell" + i + "_" + hlp;
+                        openNull(i, hlp, ide);
+                    }
+                    if (j+1 < n) {
+                        hlp = j+1;
+                        ide = "cell" + i + "_" + hlp;
+                        openNull(i, hlp, ide);
+                    }
+                }
+            }
+        }
+
+
         //обработка нажатия на ячейку
         function onCellClick(event) {
             //проверка, что мины еще не открыты
@@ -210,17 +245,22 @@
                         showfield();
                     }
                     else {
-                        //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
-                        document.getElementById(ide).innerText = field[i2][j2].value;
-                        //увеличиваем счетчик открытых ячеек
-                        count_cell++;
-                        //если ячейки без мин закончились, то игрок выиграл
-                        if (count_cell == n * n - m) {
-                            //alert('Поздравляю, Вы выиграли!'); 
-                            document.getElementById("finish_window").style.visibility = "visible";
-                            document.getElementById("finish").innerText = "Поздравляю, Вы выиграли!";
-                            setTimeout(function () { clearInterval(ti); }, 1000);
-                            lose = 1; showfield();
+                        if (field[i2][j2].value == "0") {
+                            openNull(i2, j2, ide);
+                        } 
+                        else {
+                            //если игрок не проиграл, то открывается значение количества мин вокруг ячейки
+                            document.getElementById(ide).innerText = field[i2][j2].value;
+                            //увеличиваем счетчик открытых ячеек
+                            count_cell++;
+                            //если ячейки без мин закончились, то игрок выиграл
+                            if (count_cell == n * n - m) {
+                                //alert('Поздравляю, Вы выиграли!'); 
+                                document.getElementById("finish_window").style.visibility = "visible";
+                                document.getElementById("finish").innerText = "Поздравляю, Вы выиграли!";
+                                setTimeout(function () { clearInterval(ti); }, 1000);
+                                lose = 1; showfield();
+                        }
                         }
                     }
                 }
