@@ -184,6 +184,19 @@
 
         //открытие нулевой области
         function openNull(i, j, ide){
+            if (typeof i === "object"){
+                i = i[0];
+            }
+            if (typeof i === "string"){
+                i = parseInt(i);
+            }
+            if (typeof j === "object"){
+                j = j[0];
+            }
+            if (typeof j === "string"){
+                j = parseInt(j);
+            }                        
+            console.log(i, j, ide);
             if (field[i][j].player_see == "c")
             {
                 document.getElementById(ide).innerText = field[i][j].value;
@@ -191,25 +204,25 @@
                 field[i][j].mark = "n";
                 if (field[i][j].value == "0")
                 {
-                    if (i-1 >= 0) {
+                    if (i-1 >= 0){
                         hlp = i-1;
                         ide = "cell" + hlp + "_" + j;
                         openNull(hlp, j, ide);
                        }
                     if (i+1 < n) { 
-                        hlp = i+1;
-                        ide = "cell" + hlp + "_" + j;
-                        openNull(hlp, j, ide); 
+                        hlp2 = i+1;
+                        ide = "cell" + hlp2 + "_" + j;
+                        openNull(hlp2, j, ide); 
                     }
                     if (j-1 >= 0) {
-                        hlp = j-1;
-                        ide = "cell" + i + "_" + hlp;
-                        openNull(i, hlp, ide);
+                        hlp3 = j-1;
+                        ide = "cell" + i + "_" + hlp3;
+                        openNull(i, hlp3, ide);
                     }
                     if (j+1 < n) {
-                        hlp = j+1;
-                        ide = "cell" + i + "_" + hlp;
-                        openNull(i, hlp, ide);
+                        hlp4 = j+1;
+                        ide = "cell" + i + "_" +hlp4;
+                        openNull(i, hlp4, ide);
                     }
                 }
             }
@@ -274,8 +287,8 @@
             //Задание количества бомб - автоматически или от пользователя
             //Задаем рандомное количество мин 
             if (document.getElementById('stndmine').checked) {
-                min_m = n * n / 8;
-                max_m = n * n / 4;
+                min_m = n * n / 10;
+                max_m = n * n / 6;
                 m = Math.random() * (max_m - min_m) + min_m;
                 m = Math.round(m);
             }
