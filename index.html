@@ -26,6 +26,7 @@
         <p id="finish"></p>
         <!-- <input type="button" class="button" value="Закрыть"><input type="button" class="button" value="Лучшие результаты">
        -->
+       <input type="submit" class="button" value="Закрыть" id="close_form" onclick="onSubmClose(event);">
     </div>
     <!--игровое поле 5*5-->
     <div class="game_field" id="game_field">
@@ -210,7 +211,7 @@
                         openNull(hlp, j, ide);
                        }
                     if (i+1 < n) { 
-                        hlp2 = i+1;
+                        hlp2 = parseInt(i)+1;
                         ide = "cell" + hlp2 + "_" + j;
                         openNull(hlp2, j, ide); 
                     }
@@ -220,7 +221,7 @@
                         openNull(i, hlp3, ide);
                     }
                     if (j+1 < n) {
-                        hlp4 = j+1;
+                        hlp4 = parseInt(j)+1;
                         ide = "cell" + i + "_" +hlp4;
                         openNull(i, hlp4, ide);
                     }
@@ -279,6 +280,11 @@
                 }
             }
         }
+
+        function onSubmClose(event) {
+            document.getElementById("finish_window").style.visibility = "hidden";
+        }
+
         //функция чтения значения из формы
         function onSubm(event) {
             event.stopPropagation();
