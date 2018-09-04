@@ -126,3 +126,8 @@ border: 1px solid #32363f;
 .buttons {
     text-align: center;
 }
+
+.field_button {
+    margin: 10px 5px;
+    width: 135px;
+}

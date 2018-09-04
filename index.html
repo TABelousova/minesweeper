@@ -50,6 +50,8 @@
         </span>
         <table id="table">
         </table>
+        <input type="submit" class="button field_button" value="Новая игра" id="new_game_start" onclick="onNewGame(event);">
+        <input type="submit" class="button field_button" value="Рекорды" id="record_table" onclick="onRecord(event);">         
         <div class="instruction">
             <snap class="instruction-bold">
                 Чтобы открыть клетку поля,
@@ -85,8 +87,7 @@
         <!--<div class="buttons">
         <input type="button" class="button" value="Начать заново" id="new-game">
         </div>-->
-    </div>
-
+        </div>
     <script type="text/javascript"> 
         //количество открытых ячеек для поверки, есть ли неоткрытые не мины
         var count_cell = 0;
