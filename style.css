@@ -85,6 +85,7 @@ p#finish {
 
 #finish_window {
     visibility: hidden;
+    padding-bottom:50px;
 }
 
 input {
@@ -130,4 +131,10 @@ border: 1px solid #32363f;
 .field_button {
     margin: 10px 5px;
     width: 135px;
+}
+
+#close_form {
+    position:absolute;
+    bottom: 15px;
+    left: calc(176px - 35px);
 }
