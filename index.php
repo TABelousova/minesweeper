@@ -65,33 +65,33 @@ if($result)
         <input type="submit" class="button field_button" value="Новая игра" id="new_game_start" onclick="onNewGame(event);">
         <input type="submit" class="button field_button" value="Рекорды" id="record_table" onclick="onRecord(event);">         
         <div class="instruction">
-            <snap class="instruction-bold">
+            <span class="instruction-bold">
                 Чтобы открыть клетку поля,
-            </snap>
+            </span>
             <span class="instruction-text">
                 нажмите левую кнопку мыши
             </span>
         </div>
         <div class="instruction">
-            <snap class="instruction-bold">
+            <span class="instruction-bold">
                 Чтобы отметить клетку с бомбой,
-            </snap>
+            </span>
             <span class="instruction-text">
                 нажмите правую кнопку мыши.
             </span>
         </div>
         <div class="instruction">
-            <snap class="instruction-bold">
+            <span class="instruction-bold">
                 Чтобы отметить клетку знаком вопроса,
-            </snap>
+            </span>
             <span class="instruction-text">
                 нажмите правую кнопку мыши повторно.
             </span>
         </div>
         <div class="instruction">
-            <snap class="instruction-bold">
+            <span class="instruction-bold">
                 Для снятия отметки,
-            </snap>
+            </span>
             <span class="instruction-text">
                 нажмите правую кнопку мыши.
             </span>
