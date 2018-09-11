@@ -20,7 +20,7 @@ if($result)
 ?>
 <body id="wer">
     <div class="popup_window" id="start_setting">
-        <form action="index.html" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
+        <form action="index.php" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
             <p>Ширина игрового поля</p>
             <input type="number" min="2" max="99" step="1" size="20" name="n_value" id="n_value">
             <p>Количество бомб</p>

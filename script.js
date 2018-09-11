@@ -111,6 +111,7 @@
             if (field[i][j].player_see == "c")
             {
                 document.getElementById(ide).innerText = field[i][j].value;
+                count_cell++;
                 field[i][j].player_see = "o";
                 field[i][j].mark = "n";
                 if (field[i][j].value == "0")
