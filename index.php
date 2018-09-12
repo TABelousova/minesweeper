@@ -8,10 +8,11 @@
 
 <?php
 require_once 'connection.php'; // подключаем скрипт
+require_once 'records.php';
 // подключаемся к серверу
 $link = mysqli_connect($host, $user, $password, $database) 
     or die("Ошибка " . mysqli_error($link));
-    $query ="SELECT * FROM records";
+    //$query ="SELECT * FROM records";
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
 if($result)
 {
