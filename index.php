@@ -10,14 +10,14 @@
 require_once 'connection.php'; // подключаем скрипт
 require_once 'records.php';
 // подключаемся к серверу
-$link = mysqli_connect($host, $user, $password, $database) 
-    or die("Ошибка " . mysqli_error($link));
-    //$query ="SELECT * FROM records";
-$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
-if($result)
-{
-    echo "Выполнение запроса прошло успешно";
-}
+// $link = mysqli_connect($host, $user, $password, $database) 
+//     or die("Ошибка " . mysqli_error($link));
+//     //$query ="SELECT * FROM records";
+// $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+// if($result)
+// {
+//     echo "Выполнение запроса прошло успешно";
+// }
 ?>
 <body id="wer">
     <div class="popup_window" id="start_setting">
@@ -66,7 +66,9 @@ if($result)
         <table id="table">
         </table>
         <input type="submit" class="button field_button" value="Новая игра" id="new_game_start" onclick="onNewGame(event);">
-        <input type="submit" class="button field_button" value="Рекорды" id="record_table" onclick="onRecord(event);">         
+        <form action="records.php">
+            <input type="submit" class="button field_button" value="Рекорды" id="record_table">         
+        </form>
         <div class="instruction">
             <span class="instruction-bold">
                 Чтобы открыть клетку поля,
