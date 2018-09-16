@@ -8,12 +8,12 @@
 
 <?php
 require_once 'connection.php'; // подключаем скрипт
-require_once 'records.php';
+//require_once 'records.php';
 // подключаемся к серверу
-// $link = mysqli_connect($host, $user, $password, $database) 
+// $link = mysqli_connect($host, $user, $password, $database)
 //     or die("Ошибка " . mysqli_error($link));
 //     //$query ="SELECT * FROM records";
-// $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
+// $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
 // if($result)
 // {
 //     echo "Выполнение запроса прошло успешно";
@@ -21,7 +21,7 @@ require_once 'records.php';
 ?>
 <body id="wer">
     <div class="popup_window" id="start_setting">
-        <form action="index.php" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
+        <form action="index.php" class="popup_form" onsubmit="onSubm(event);" id="start_setting_form" name="start_setting_form">
             <p>Ширина игрового поля</p>
             <input type="number" min="2" max="99" step="1" size="20" name="n_value" id="n_value">
             <p>Количество бомб</p>
@@ -66,8 +66,8 @@ require_once 'records.php';
         <table id="table">
         </table>
         <input type="submit" class="button field_button" value="Новая игра" id="new_game_start" onclick="onNewGame(event);">
-        <form action="records.php">
-            <input type="submit" class="button field_button" value="Рекорды" id="record_table">         
+        <form action="records.php" class="results">
+            <input type="submit" class="button field_button" value="Рекорды" id="record_table">
         </form>
         <div class="instruction">
             <span class="instruction-bold">
