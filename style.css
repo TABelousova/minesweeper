@@ -3,12 +3,19 @@ body {
   background-color: #dcdcdc;
 }
 
-table {
+.mines_field {
   background-color: #beb5c5;
   border: 1px solid #32363f;
+}
+
+table {
   padding: 0;
   margin: 0 auto;
   border-spacing: 0;
+}
+
+.record_field {
+  background-color: white;
 }
 
 tr {
