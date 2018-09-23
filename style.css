@@ -18,12 +18,12 @@ table {
   background-color: white;
 }
 
-tr {
+#table tr {
   margin: 0;
   padding: 0;
 }
 
-td {
+#table td {
   padding: 5px;
   margin: 0;
   border: 1px dashed dimgray;

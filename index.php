@@ -63,7 +63,7 @@ require_once 'connection.php'; // подключаем скрипт
                 </span>
             </p>
         </span>
-        <table id="table">
+        <table id="table" class="mines_field">
         </table>
         <input type="submit" class="button field_button" value="Новая игра" id="new_game_start" onclick="onNewGame(event);">
         <form action="records.php" class="results">
