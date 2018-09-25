@@ -9,7 +9,9 @@
 require_once 'connection.php';
 $link = mysqli_connect($host, $user, $password, $database)
 or die("Ошибка " . mysqli_error($link));
-$query = "SELECT name, game_time, field_size, mines FROM records";
+$query = "INSERT INTO records (name, game_time, field_size, mines) VALUES ('gamer_1', 112, 12, 3);";
+$result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
+$query = "SELECT name, game_time, field_size, mines FROM records;";
 $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
 if($result)
 {
